@@ -1,0 +1,17 @@
+{
+    "name": "fbkpay/sdk",
+    "description": "Fubuki Pay PHP SDK",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=7.1.0",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "FubukiPay\\": "src/"
+        }
+    }
+}
