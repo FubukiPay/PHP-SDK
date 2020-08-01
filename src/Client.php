@@ -12,7 +12,7 @@ class Client
     protected $access_key;
     protected $secret_key;
 
-    public function __construct(string $access_key, string $secret_key, string $endpoint = 'https://api.fubuki.us/v1')
+    public function __construct(string $access_key, string $secret_key, string $endpoint = 'https://api.fubuki.us')
     {
         $this->endpoint = $endpoint;
         $this->access_key = $access_key;
@@ -66,7 +66,7 @@ class Client
             $body['return_url'] = $return_url;
         }
 
-        $s = $this->sign('/invoice/create');
+        $s = $this->sign('/v1/invoice/create');
 
         $rsp = $this->post(
             $s['url'],
