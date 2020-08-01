@@ -66,7 +66,7 @@ class Client
             $body['return_url'] = $return_url;
         }
 
-        $s = $this->sign('/v1/invoice/create');
+        $s = $this->sign('/invoice/create');
 
         $rsp = $this->post(
             $s['url'],
@@ -79,7 +79,7 @@ class Client
 
         $result = json_decode($rsp);
         if (!isset($result->code)) {
-            throw new ApiException('API Server Failure');
+            throw new ApiException('Unexpected response from API: ' . $rsp);
         }
 
         if ($result->code !== 0) {
