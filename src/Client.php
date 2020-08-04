@@ -66,7 +66,7 @@ class Client
             $body['return_url'] = $return_url;
         }
 
-        $s = $this->sign('/v1/invoice/create');
+        $s = $this->signurl('/v1/invoice/create');
 
         $rsp = $this->post(
             $s['url'],
@@ -89,7 +89,23 @@ class Client
         return $result->data;
     }
 
-    protected function sign($uri)
+    /**
+     * Verify a signature.
+     * @param string $data 
+     * @param string $signature 
+     * @return bool 
+     */
+    public function verify(string $data, string $signature): bool
+    {
+        $lo_sign = hash_hmac('SHA3-384', $data, $this->secret_key);
+        if (strcasecmp($lo_sign, $signature) !== 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    protected function signurl($uri)
     {
         $nonce = md5(random_bytes(16));
         $ts = time();
